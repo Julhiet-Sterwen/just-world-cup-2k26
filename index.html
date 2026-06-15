@@ -149,8 +149,8 @@ footer a{color:var(--pink);text-decoration:none}
     <div class="score-pill">11 juin → 19 juil. <span>2026</span></div>
   </div>
   <div class="maj-bar" style="margin-top:14px">
-    <div class="maj-pill">Dernière MAJ&nbsp;: <span id="maj-display">15 juin 2026 à 21:54</span></div>
-    <div class="maj-pill">⚽ <span id="nb-matchs-display">0</span> / 104 matchs joués</div>
+    <div class="maj-pill">Dernière MAJ&nbsp;: <span id="maj-display">15 juin 2026 à 22:00</span></div>
+    <div class="maj-pill">⚽ <span id="nb-matchs-display">13</span> / 104 matchs joués</div>
   </div>
 </header>
 
@@ -385,7 +385,7 @@ function closeLock(){
 }
 
 // membres = données réelles issues du fichier Excel (nb inscrits par communauté)
-var STATE={"majDate":"15 juin 2026 à 21:54","nbMatchs":0,"equipes":[{"name":"ARC","score":410,"membres":3,"evo":1},{"name":"ASSUR","score":0,"membres":2,"evo":1},{"name":"BaaS","score":315,"membres":21,"evo":1},{"name":"BLING","score":285,"membres":7,"evo":0},{"name":"BOOST","score":359,"membres":17,"evo":-1},{"name":"CHANG","score":295,"membres":8,"evo":0},{"name":"DI4B","score":367,"membres":9,"evo":0},{"name":"E2U","score":0,"membres":2,"evo":0},{"name":"FinS","score":0,"membres":1,"evo":0},{"name":"FLOW","score":0,"membres":0,"evo":0},{"name":"Fonction Support","score":279,"membres":12,"evo":0},{"name":"GROW","score":275,"membres":6,"evo":0},{"name":"HRA","score":0,"membres":0,"evo":0},{"name":"HRConseil","score":402,"membres":15,"evo":0},{"name":"LEMAN","score":261,"membres":7,"evo":0},{"name":"LUXE","score":0,"membres":2,"evo":0},{"name":"MANAI","score":0,"membres":1,"evo":0},{"name":"MARFI","score":0,"membres":2,"evo":0},{"name":"ORPER","score":158,"membres":6,"evo":0},{"name":"PEEx","score":399,"membres":3,"evo":0},{"name":"PerformanSe","score":360,"membres":20,"evo":0},{"name":"PUBLIC","score":339,"membres":5,"evo":0},{"name":"(RE)Set","score":318,"membres":9,"evo":0},{"name":"TRANSVERSE","score":0,"membres":0,"evo":0}]};
+var STATE={"majDate":"15 juin 2026 à 22:00","nbMatchs":13,"equipes":[{"name":"ARC","score":410,"membres":3,"evo":1},{"name":"ASSUR","score":0,"membres":2,"evo":1},{"name":"BaaS","score":315,"membres":21,"evo":1},{"name":"BLING","score":285,"membres":7,"evo":0},{"name":"BOOST","score":359,"membres":17,"evo":-1},{"name":"CHANG","score":295,"membres":8,"evo":0},{"name":"DI4B","score":367,"membres":9,"evo":0},{"name":"E2U","score":0,"membres":2,"evo":0},{"name":"FinS","score":0,"membres":1,"evo":0},{"name":"FLOW","score":0,"membres":0,"evo":0},{"name":"Fonction Support","score":279,"membres":12,"evo":0},{"name":"GROW","score":275,"membres":6,"evo":0},{"name":"HRA","score":0,"membres":0,"evo":0},{"name":"HRConseil","score":402,"membres":15,"evo":0},{"name":"LEMAN","score":261,"membres":7,"evo":0},{"name":"LUXE","score":0,"membres":2,"evo":0},{"name":"MANAI","score":0,"membres":1,"evo":0},{"name":"MARFI","score":0,"membres":2,"evo":0},{"name":"ORPER","score":158,"membres":6,"evo":0},{"name":"PEEx","score":399,"membres":3,"evo":0},{"name":"PerformanSe","score":360,"membres":20,"evo":0},{"name":"PUBLIC","score":339,"membres":5,"evo":0},{"name":"(RE)Set","score":318,"membres":9,"evo":0},{"name":"TRANSVERSE","score":0,"membres":0,"evo":0}]};
 function save(){localStorage.setItem('just2k26',JSON.stringify(STATE))}
 function load(){var d=localStorage.getItem('just2k26');if(d){try{var s=JSON.parse(d);s.equipes.forEach(function(e){e.score=Number(e.score)||0;e.evo=Number(e.evo)||0;if(e.membres===undefined)e.membres=0;});STATE=s;}catch(e){}}}
 load();
