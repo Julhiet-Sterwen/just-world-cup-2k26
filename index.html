@@ -57,6 +57,8 @@ h1{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;letter-spacing:-1px;backgr
 .bar-cell{padding:3px 14px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
 .bar-wrap{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.16,1,.3,1);background:linear-gradient(90deg,var(--pink),var(--blue))}
+.rank-members{font-size:.7rem;font-weight:400;color:var(--muted);margin-left:6px}
+.rank-nonevalue{font-size:.7rem;font-style:italic;font-weight:400;color:rgba(255,255,255,.3);margin-left:6px}
 
 /* FAQ */
 .search-box{margin:0 0 22px;position:relative}
@@ -106,6 +108,8 @@ h1{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;letter-spacing:-1px;backgr
 .inp-sm{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 10px;color:white;font-family:'Montserrat',Arial,sans-serif;font-size:.86rem;outline:none;transition:border-color .2s}
 .inp-sm:focus{border-color:var(--pink)}
 select.inp-sm{cursor:pointer}
+.admin-nb{width:60px;text-align:center}
+.admin-members-note{font-size:.7rem;color:var(--muted);font-style:italic;margin-top:4px}
 .btn-update{padding:13px 36px;background:linear-gradient(135deg,var(--pink),#cc0077);color:white;border:none;border-radius:50px;font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(255,68,160,.4)}
 .btn-update:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,68,160,.6)}
 
@@ -119,7 +123,7 @@ footer a{color:var(--pink);text-decoration:none}
 <div class="field"></div>
 
 <!-- VERROU ADMIN -->
-<div class="lock-overlay" id="lock-overlay" style="display: none;">
+<div class="lock-overlay" id="lock-overlay" style="display:none;">
   <div class="lock-box">
     <div class="lock-icon">🔒</div>
     <div class="lock-title">Accès Admin</div>
@@ -151,14 +155,14 @@ footer a{color:var(--pink);text-decoration:none}
 </header>
 
 <div class="tabs">
-  <button class="tab" onclick="showTab('equipes',this)">🏆 Classement</button>
+  <button class="tab on" onclick="showTab('equipes',this)">🏆 Classement</button>
   <button class="tab" onclick="showTab('faq',this)">❓ FAQ</button>
-  <button class="tab on" onclick="showTab('admin',this)">⚙️ MAJ scores</button>
+  <button class="tab" onclick="showTab('admin',this)">⚙️ MAJ scores</button>
 </div>
 
 <!-- CLASSEMENT -->
-<div id="view-equipes" class="view">
-  <div class="podium" id="podium"><div class="pod pod-2"><div class="pod-base"><div class="pod-rank">🥈</div><div class="pod-name">PerformanSe</div><div class="pod-score">2.0</div></div><div class="pod-label">2e</div></div><div class="pod pod-1"><div class="pod-base"><div class="pod-rank">🥇</div><div class="pod-name">Fonction Support</div><div class="pod-score">3.0</div></div><div class="pod-label">1er</div></div><div class="pod pod-3"><div class="pod-base"><div class="pod-rank">🥉</div><div class="pod-name">BOOST</div><div class="pod-score">1.0</div></div><div class="pod-label">3e</div></div></div>
+<div id="view-equipes" class="view on">
+  <div class="podium" id="podium"></div>
   <table class="rank-table">
     <thead><tr>
       <th>Rang</th>
@@ -166,250 +170,8 @@ footer a{color:var(--pink);text-decoration:none}
       <th style="text-align:right">Score moyen</th>
       <th style="text-align:right">Évol.</th>
     </tr></thead>
-	  <tbody id="rank-body">
-
-	  <tr class="rank-row">
-		<td class="rank-num r1">🥇</td>
-		<td class="rank-name">Fonction Support</td>
-		<td class="rank-score">3.0</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num r2">🥈</td>
-		<td class="rank-name">PerformanSe</td>
-		<td class="rank-score">2.0</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:66.67%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num r3">🥉</td>
-		<td class="rank-name">BOOST</td>
-		<td class="rank-score">1.0</td>
-		<td class="rank-evo"><span class="evo-down">▼</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:33.33%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">(RE)Set</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">ARC</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">ASSUR</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">BaaS</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-down">▼</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">BLING</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">CHANG</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">DI4B</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">E2U</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">FinS</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">FLOW</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">GROW</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">HRA</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">HRConseil</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">LEMAN</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">LUXE</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">MANAI</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">MARFI</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">ORPER</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-same">—</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">PEEx</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-down">▼</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">PUBLIC</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-up">▲</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	  <tr class="rank-row">
-		<td class="rank-num">4</td>
-		<td class="rank-name">TRANSVERSE</td>
-		<td class="rank-score">—</td>
-		<td class="rank-evo"><span class="evo-down">▼</span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div></td>
-	  </tr>
-
-	</tbody>
-   </table>
+    <tbody id="rank-body"></tbody>
+  </table>
 </div>
 
 <!-- FAQ -->
@@ -427,130 +189,130 @@ footer a{color:var(--pink);text-decoration:none}
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Je peux m'inscrire après le début de la Coupe du Monde (11 juin)&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Oui, mais <strong>pas de pronos rétroactifs</strong> - tu pars avec 0 point sur les matchs déjà joués. Inscris-toi avant le <span class="hl">11 juin</span> pour maximiser tes chances&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Je peux m'inscrire après le début de la Coupe du Monde (11 juin)&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Oui, mais <strong>pas de pronos rétroactifs</strong> - tu pars avec 0 point sur les matchs déjà joués. Inscris-toi avant le <span class="hl">11 juin</span> pour maximiser tes chances&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Je peux choisir n'importe quel pseudo MPP&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Oui, totalement libre&nbsp;! C'est la grande nouveauté 2026&nbsp;: tu remplis le <strong>formulaire de correspondance</strong> et on fait le lien nous-mêmes. Fini la chasse aux pseudos&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Je peux choisir n'importe quel pseudo MPP&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Oui, totalement libre&nbsp;! C'est la grande nouveauté 2026&nbsp;: tu remplis le <strong>formulaire de correspondance</strong> et on fait le lien nous-mêmes. Fini la chasse aux pseudos&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Je peux avoir plusieurs profils dans la ligue&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Non - <strong>un seul profil par Justin(e)</strong>. Les doublons seront supprimés dès qu'on les identifie.</div>
+      <button onclick="toggle(this)"><span>Je peux avoir plusieurs profils dans la ligue&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Non - <strong>un seul profil par Justin(e)</strong>. Les doublons seront supprimés dès qu'on les identifie.</div>
     </div>
 
     <div class="section-title">🏆&nbsp; Périmètre &amp; équipes</div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Qui peut participer à la JuSt World Cup 2K26&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Le concours est ouvert à <strong>tous les collaborateurs du groupe Julhiet Sterwen</strong>, incluant les marques&nbsp;:<ul><li><strong>Julhiet Sterwen</strong> (toutes BU)</li><li><strong>(RE)Set</strong></li><li><strong>PerformanSe</strong></li><li><strong>HRConseil</strong></li></ul>On parle d'«&nbsp;équipe&nbsp;» pour tenir compte des spécificités de chaque marque. Le canal de communication officiel est l'espace Teams <strong>«&nbsp;JuSt Activités&nbsp;»</strong> (et Just Teams), auquel tous les collaborateurs ont accès.</div>
+      <button onclick="toggle(this)"><span>Qui peut participer à la JuSt World Cup 2K26&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Le concours est ouvert à <strong>tous les collaborateurs du groupe Julhiet Sterwen</strong>, incluant les marques&nbsp;:<ul><li><strong>Julhiet Sterwen</strong> (toutes BU)</li><li><strong>(RE)Set</strong></li><li><strong>PerformanSe</strong></li><li><strong>HRConseil</strong></li></ul>On parle d'«&nbsp;équipe&nbsp;» pour tenir compte des spécificités de chaque marque. Le canal de communication officiel est l'espace Teams <strong>«&nbsp;JuSt Activités&nbsp;»</strong> (et Just Teams), auquel tous les collaborateurs ont accès.</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Je n'ai pas d'équipe JS, je fais quoi&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Deux options&nbsp;:<ul><li>Suis ton cœur et rejoins l'équipe de ton choix (avant le 11 juin, pas de changement ensuite&nbsp;!)</li><li>Joue sous la bannière <strong>Fonction Support</strong> - en 2024, c'est l'Interne qui a trusté la 1ère place à l'Euro 😉</li></ul></div>
+      <button onclick="toggle(this)"><span>Je n'ai pas d'équipe JS, je fais quoi&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Deux options&nbsp;:<ul><li>Suis ton cœur et rejoins l'équipe de ton choix (avant le 11 juin, pas de changement ensuite&nbsp;!)</li><li>Joue sous la bannière <strong>Fonction Support</strong> - en 2024, c'est l'Interne qui a trusté la 1ère place à l'Euro 😉</li></ul></div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Peut-on changer d'équipe en cours de tournoi&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open"><strong>Non.</strong> Le choix est définitif à partir du coup d'envoi du 1er match (11 juin). Choisis bien&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Peut-on changer d'équipe en cours de tournoi&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer"><strong>Non.</strong> Le choix est définitif à partir du coup d'envoi du 1er match (11 juin). Choisis bien&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>C'est quoi le rôle d'Ambassadeur(rice) d'équipe&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">L'Ambassadeur(rice) est le <strong>relais officiel</strong> de son équipe pendant toute la Coupe du Monde. Son rôle&nbsp;:<ul><li>Relayer les classements dans le canal Teams de son équipe</li><li>Motiver les membres à faire leurs pronos avant chaque match</li><li>Faire le lien avec l'organisation en cas de question ou problème</li></ul>En 2024, les équipes avec un ambassadeur actif ont obtenu de <strong>meilleurs taux de participation</strong>. <span class="hl">Volontaires&nbsp;? Un MP suffit&nbsp;!</span></div>
+      <button onclick="toggle(this)"><span>C'est quoi le rôle d'Ambassadeur(rice) d'équipe&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">L'Ambassadeur(rice) est le <strong>relais officiel</strong> de son équipe pendant toute la Coupe du Monde. Son rôle&nbsp;:<ul><li>Relayer les classements dans le canal Teams de son équipe</li><li>Motiver les membres à faire leurs pronos avant chaque match</li><li>Faire le lien avec l'organisation en cas de question ou problème</li></ul>En 2024, les équipes avec un ambassadeur actif ont obtenu de <strong>meilleurs taux de participation</strong>. <span class="hl">Volontaires&nbsp;? Un MP suffit&nbsp;!</span></div>
     </div>
 
     <div class="section-title">📋&nbsp; Formulaire de correspondance</div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Pourquoi je dois remplir le formulaire&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Sans le formulaire, on ne peut pas te rattacher à ton équipe JS → <strong>tu es invisible dans le classement</strong>. 30&nbsp;secondes chrono, c'est obligatoire&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Pourquoi je dois remplir le formulaire&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Sans le formulaire, on ne peut pas te rattacher à ton équipe JS → <strong>tu es invisible dans le classement</strong>. 30&nbsp;secondes chrono, c'est obligatoire&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>J'ai changé mon pseudo MPP après avoir rempli le formulaire, que faire&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Préviens <strong>Marion Mignot ou Donald Hadegbe</strong> en MP - sinon tes points seront perdus dans la nature&nbsp;👻</div>
+      <button onclick="toggle(this)"><span>J'ai changé mon pseudo MPP après avoir rempli le formulaire, que faire&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Préviens <strong>Marion Mignot ou Donald Hadegbe</strong> en MP - sinon tes points seront perdus dans la nature&nbsp;👻</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Où trouver le formulaire&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Le lien est dans la communication de lancement sur le canal <strong>JuSt Activités</strong> de Teams. Si tu ne le trouves plus, envoie un MP à Marion ou Donald.</div>
+      <button onclick="toggle(this)"><span>Où trouver le formulaire&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Le lien est dans la communication de lancement sur le canal <strong>JuSt Activités</strong> de Teams. Si tu ne le trouves plus, envoie un MP à Marion ou Donald.</div>
     </div>
 
     <div class="section-title">🏆&nbsp; Classement &amp; récompenses</div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Comment fonctionne le classement des équipes&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Par <strong>score moyen</strong> = total des points ÷ nombre de membres. Contrairement à 2024, on ne fait <strong>plus la somme totale</strong> - ce qui évitait de favoriser les grandes équipes. Si un membre ne fait pas de prono sur un match, <strong>cela tire la moyenne de l'équipe vers le bas</strong>. Chaque prono compte&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Comment fonctionne le classement des équipes&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Par <strong>score moyen</strong> = total des points ÷ nombre de membres. Contrairement à 2024, on ne fait <strong>plus la somme totale</strong> - ce qui évitait de favoriser les grandes équipes. Si un membre ne fait pas de prono sur un match, <strong>cela tire la moyenne de l'équipe vers le bas</strong>. Chaque prono compte&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Mon équipe a peu de membres, on a une chance&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Plus que jamais&nbsp;! Avec la moyenne, une petite équipe très engagée bat une grande équipe de joueurs irréguliers. <span class="hl">Qualité &gt; quantité</span>&nbsp;😉</div>
+      <button onclick="toggle(this)"><span>Mon équipe a peu de membres, on a une chance&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Plus que jamais&nbsp;! Avec la moyenne, une petite équipe très engagée bat une grande équipe de joueurs irréguliers. <span class="hl">Qualité &gt; quantité</span>&nbsp;😉</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Combien de membres minimum pour qu'une équipe soit classée&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open"><span class="hl">3 membres</span> minimum. En dessous, l'équipe n'apparaît pas au classement officiel.</div>
+      <button onclick="toggle(this)"><span>Combien de membres minimum pour qu'une équipe soit classée&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer"><span class="hl">3 membres</span> minimum. En dessous, l'équipe n'apparaît pas au classement officiel.</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Quelles sont les récompenses&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Avec un budget de <strong>300&nbsp;€</strong>, deux prix sont prévus&nbsp;:<ul><li>🏍 <strong>Trophée équipe gagnante</strong> - l'équipe avec le meilleur score moyen</li><li>🎍 <strong>Maillot au choix</strong> pour le participant ayant le <strong>plus grand nombre de points individuels</strong> toutes équipes confondues - tu choisis le maillot de l'équipe que tu soutiens ⚽<br><em>Et si tu es 1er au général mais que ton équipe n'a pas gagné... on pense aussi à toi&nbsp;😉</em></li></ul></div>
+      <button onclick="toggle(this)"><span>Quelles sont les récompenses&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Avec un budget de <strong>300&nbsp;€</strong>, deux prix sont prévus&nbsp;:<ul><li>🏆 <strong>Trophée équipe gagnante</strong> - l'équipe avec le meilleur score moyen</li><li>🎽 <strong>Maillot au choix</strong> pour le participant ayant le <strong>plus grand nombre de points individuels</strong> toutes équipes confondues - tu choisis le maillot de l'équipe que tu soutiens ⚽<br><em>Et si tu es 1er au général mais que ton équipe n'a pas gagné... on pense aussi à toi&nbsp;😉</em></li></ul></div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>À quelle fréquence le classement est mis à jour&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open"><strong>2 fois par semaine - lundi et vendredi</strong>. Le classement est partagé sur Teams. N'oublie pas de faire tes pronos avant chaque match&nbsp;!</div>
+      <button onclick="toggle(this)"><span>À quelle fréquence le classement est mis à jour&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer"><strong>2 fois par semaine - lundi et vendredi</strong>. Le classement est partagé sur Teams. N'oublie pas de faire tes pronos avant chaque match&nbsp;!</div>
     </div>
 
     <div class="section-title">⚽&nbsp; Règles MPP</div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Comment ça marche MPP&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Tu pronostics le <strong>score exact</strong> de chaque match avant le coup d'envoi. Score exact = maximum de points. Bon résultat = points quand même. Les cotes influencent le gain - pronostiquer une surprise rapporte plus&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Comment ça marche MPP&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Tu pronostics le <strong>score exact</strong> de chaque match avant le coup d'envoi. Score exact = maximum de points. Bon résultat = points quand même. Les cotes influencent le gain - pronostiquer une surprise rapporte plus&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Les phases finales comptent plus&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Oui&nbsp;! MPP applique des <strong>multiplicateurs</strong> sur les éliminatoires&nbsp;:<ul><li>x1,5 en 8es de finale</li><li>x2 en quarts de finale</li><li>x2,5 en demi-finales</li><li><span class="hl">x3 en finale</span> 🔥</li></ul>Un tournoi peut se retourner jusqu'au bout&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Les phases finales comptent plus&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Oui&nbsp;! MPP applique des <strong>multiplicateurs</strong> sur les éliminatoires&nbsp;:<ul><li>x1,5 en 8es de finale</li><li>x2 en quarts de finale</li><li>x2,5 en demi-finales</li><li><span class="hl">x3 en finale</span> 🔥</li></ul>Un tournoi peut se retourner jusqu'au bout&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>La Coupe du Monde 2026 c'est combien de matchs&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open"><span class="hl">104 matchs</span> avec <strong>48 équipes</strong>, répartis entre 🇺🇸&nbsp;USA, 🇨🇦&nbsp;Canada et 🇲🇽&nbsp;Mexique - du <strong>11 juin au 19 juillet 2026</strong>.</div>
+      <button onclick="toggle(this)"><span>La Coupe du Monde 2026 c'est combien de matchs&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer"><span class="hl">104 matchs</span> avec <strong>48 équipes</strong>, répartis entre 🇺🇸&nbsp;USA, 🇨🇦&nbsp;Canada et 🇲🇽&nbsp;Mexique - du <strong>11 juin au 19 juillet 2026</strong>.</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Pas besoin d'être expert en foot&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Absolument pas&nbsp;! En 2024, ce sont souvent les <strong>non-initiés qui ont tout raflé</strong> 🙃 Les cotes et un peu de chance font parfois mieux que l'analyse. Lance-toi&nbsp;!</div>
+      <button onclick="toggle(this)"><span>Pas besoin d'être expert en foot&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Absolument pas&nbsp;! En 2024, ce sont souvent les <strong>non-initiés qui ont tout raflé</strong> 🙃 Les cotes et un peu de chance font parfois mieux que l'analyse. Lance-toi&nbsp;!</div>
     </div>
 
     <div class="section-title">🔧&nbsp; Problèmes &amp; questions</div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>Mon pseudo n'apparaît pas dans le classement JS&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Tu n'as probablement pas rempli le formulaire (lien dans la comm de lancement sur Teams). Si tu l'as rempli et que tu n'apparais toujours pas, envoie un MP à <strong>Marion ou Donald</strong>.</div>
+      <button onclick="toggle(this)"><span>Mon pseudo n'apparaît pas dans le classement JS&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Tu n'as probablement pas rempli le formulaire (lien dans la comm de lancement sur Teams). Si tu l'as rempli et que tu n'apparais toujours pas, envoie un MP à <strong>Marion ou Donald</strong>.</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>J'ai oublié de faire mon prono avant un match, je peux le faire après&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">Non - MPP <strong>ferme les pronos au coup d'envoi</strong> de chaque match. Active les notifications de l'appli pour ne pas oublier&nbsp;!</div>
+      <button onclick="toggle(this)"><span>J'ai oublié de faire mon prono avant un match, je peux le faire après&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">Non - MPP <strong>ferme les pronos au coup d'envoi</strong> de chaque match. Active les notifications de l'appli pour ne pas oublier&nbsp;!</div>
     </div>
 
     <div class="item">
-      <button onclick="toggle(this)"><span>L'appli MPP est disponible sur quel support&nbsp;?</span><div class="arrow open">▲</div></button>
-      <div class="answer open">MPP est disponible sur <strong>iOS et Android</strong>, et en version web sur <a href="https://mpp.football" target="_blank">mpp.football</a>. 100&nbsp;% gratuit.</div>
+      <button onclick="toggle(this)"><span>L'appli MPP est disponible sur quel support&nbsp;?</span><div class="arrow">▼</div></button>
+      <div class="answer">MPP est disponible sur <strong>iOS et Android</strong>, et en version web sur <a href="https://mpp.football" target="_blank">mpp.football</a>. 100&nbsp;% gratuit.</div>
     </div>
 
   </div>
 </div>
 
 <!-- ADMIN -->
-<div id="view-admin" class="view on">
+<div id="view-admin" class="view">
   <div class="admin-box">
     <div class="admin-section-title">📅&nbsp; Informations générales</div>
     <div class="admin-meta">
@@ -558,13 +320,15 @@ footer a{color:var(--pink);text-decoration:none}
       <input type="number" id="nb-matchs-input" class="inp" style="width:90px" min="0" max="104" placeholder="0">
     </div>
     <div class="admin-section-title">🏆&nbsp; Scores équipes</div>
+    <p class="admin-members-note" style="margin-bottom:12px">Le nb d'inscrits est indicatif (données fixes issues du formulaire de correspondance). Modifiez-le si nécessaire.</p>
     <table class="admin-table">
       <thead><tr>
         <th>Équipe</th>
+        <th>Nb inscrits</th>
         <th>Score moyen</th>
         <th>Évolution</th>
       </tr></thead>
-      <tbody id="admin-tbody"><tr><td>ARC</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-0" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-0"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>ASSUR</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-1" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-1"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>BaaS</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-2" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-2"><option value="0">— stable</option><option value="1">▲ hausse</option><option value="-1" selected="">▼ baisse</option></select></td></tr><tr><td>BLING</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-3" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-3"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>BOOST</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-4" value="1" placeholder="0.0"></td><td><select class="inp-sm" id="evo-4"><option value="0">— stable</option><option value="1">▲ hausse</option><option value="-1" selected="">▼ baisse</option></select></td></tr><tr><td>CHANG</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-5" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-5"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>DI4B</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-6" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-6"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>E2U</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-7" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-7"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>FinS</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-8" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-8"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>FLOW</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-9" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-9"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>Fonction Support</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-10" value="3" placeholder="0.0"></td><td><select class="inp-sm" id="evo-10"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>GROW</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-11" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-11"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>HRA</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-12" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-12"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>HRConseil</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-13" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-13"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>LEMAN</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-14" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-14"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>LUXE</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-15" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-15"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>MANAI</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-16" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-16"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>MARFI</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-17" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-17"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>ORPER</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-18" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-18"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>PEEx</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-19" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-19"><option value="0">— stable</option><option value="1">▲ hausse</option><option value="-1" selected="">▼ baisse</option></select></td></tr><tr><td>PerformanSe</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-20" value="2" placeholder="0.0"></td><td><select class="inp-sm" id="evo-20"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>PUBLIC</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-21" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-21"><option value="0">— stable</option><option value="1" selected="">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>(RE)Set</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-22" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-22"><option value="0" selected="">— stable</option><option value="1">▲ hausse</option><option value="-1">▼ baisse</option></select></td></tr><tr><td>TRANSVERSE</td><td><input class="inp-sm" type="number" step="0.1" min="0" id="score-23" value="" placeholder="0.0"></td><td><select class="inp-sm" id="evo-23"><option value="0">— stable</option><option value="1">▲ hausse</option><option value="-1" selected="">▼ baisse</option></select></td></tr></tbody>
+      <tbody id="admin-tbody"></tbody>
     </table>
     <button class="btn-update" onclick="updateScores()">⚡&nbsp; Mettre à jour le classement</button>
     <button class="btn-update" onclick="exportHTML()" style="background:linear-gradient(135deg,#00c853,#00897b);margin-top:10px">⬇&nbsp; Télécharger pour GitHub</button>
@@ -582,9 +346,7 @@ var ADMIN_HASH = "9e882466b4c77689a0ec0c8fff06efb8608b02e57b3c2a5d25eed7dcb2b887
 
 function exportHTML(){
   var src=document.documentElement.outerHTML;
-  // Injecter le STATE actuel (avec les vrais scores) dans le source
   var stateStr=JSON.stringify(STATE);
-  // Remplacer le STATE initial dans le source par le STATE courant
   src=src.replace(/var STATE=\{[\s\S]*?\};\s*\nfunction save/,
     'var STATE='+stateStr+';\nfunction save');
   var blob=new Blob([src],{type:'text/html;charset=utf-8'});
@@ -622,9 +384,36 @@ function closeLock(){
   renderEquipes();
 }
 
-var STATE={"majDate":"29 mai 2026 à 07:46","nbMatchs":0,"equipes":[{"name":"ARC","score":0,"membres":0,"evo":1},{"name":"ASSUR","score":0,"membres":0,"evo":1},{"name":"BaaS","score":0,"membres":0,"evo":-1},{"name":"BLING","score":0,"membres":0,"evo":0},{"name":"BOOST","score":1,"membres":0,"evo":-1},{"name":"CHANG","score":0,"membres":0,"evo":1},{"name":"DI4B","score":0,"membres":0,"evo":0},{"name":"E2U","score":0,"membres":0,"evo":0},{"name":"FinS","score":0,"membres":0,"evo":0},{"name":"FLOW","score":0,"membres":0,"evo":0},{"name":"Fonction Support","score":3,"membres":0,"evo":0},{"name":"GROW","score":0,"membres":0,"evo":0},{"name":"HRA","score":0,"membres":0,"evo":1},{"name":"HRConseil","score":0,"membres":0,"evo":0},{"name":"LEMAN","score":0,"membres":0,"evo":0},{"name":"LUXE","score":0,"membres":0,"evo":0},{"name":"MANAI","score":0,"membres":0,"evo":0},{"name":"MARFI","score":0,"membres":0,"evo":1},{"name":"ORPER","score":0,"membres":0,"evo":0},{"name":"PEEx","score":0,"membres":0,"evo":-1},{"name":"PerformanSe","score":2,"membres":0,"evo":0},{"name":"PUBLIC","score":0,"membres":0,"evo":1},{"name":"(RE)Set","score":0,"membres":0,"evo":0},{"name":"TRANSVERSE","score":0,"membres":0,"evo":-1}]};
+// membres = données réelles issues du fichier Excel (nb inscrits par communauté)
+var STATE={"majDate":"29 mai 2026 à 07:46","nbMatchs":0,"equipes":[
+  {"name":"ARC","score":0,"membres":3,"evo":1},
+  {"name":"ASSUR","score":0,"membres":1,"evo":1},
+  {"name":"BaaS","score":0,"membres":14,"evo":-1},
+  {"name":"BLING","score":0,"membres":6,"evo":0},
+  {"name":"BOOST","score":1,"membres":15,"evo":-1},
+  {"name":"CHANG","score":0,"membres":8,"evo":1},
+  {"name":"DI4B","score":0,"membres":9,"evo":0},
+  {"name":"E2U","score":0,"membres":1,"evo":0},
+  {"name":"FinS","score":0,"membres":1,"evo":0},
+  {"name":"FLOW","score":0,"membres":0,"evo":0},
+  {"name":"Fonction Support","score":3,"membres":9,"evo":0},
+  {"name":"GROW","score":0,"membres":4,"evo":0},
+  {"name":"HRA","score":0,"membres":0,"evo":1},
+  {"name":"HRConseil","score":0,"membres":15,"evo":0},
+  {"name":"LEMAN","score":0,"membres":5,"evo":0},
+  {"name":"LUXE","score":0,"membres":2,"evo":0},
+  {"name":"MANAI","score":0,"membres":1,"evo":0},
+  {"name":"MARFI","score":0,"membres":1,"evo":1},
+  {"name":"ORPER","score":0,"membres":3,"evo":0},
+  {"name":"PEEx","score":0,"membres":3,"evo":-1},
+  {"name":"PerformanSe","score":2,"membres":20,"evo":0},
+  {"name":"PUBLIC","score":0,"membres":5,"evo":1},
+  {"name":"(RE)Set","score":0,"membres":7,"evo":0},
+  {"name":"TRANSVERSE","score":0,"membres":0,"evo":-1}
+]};
+
 function save(){localStorage.setItem('just2k26',JSON.stringify(STATE))}
-function load(){var d=localStorage.getItem('just2k26');if(d){try{var s=JSON.parse(d);s.equipes.forEach(function(e){e.score=Number(e.score)||0;e.evo=Number(e.evo)||0;});STATE=s;}catch(e){}}}
+function load(){var d=localStorage.getItem('just2k26');if(d){try{var s=JSON.parse(d);s.equipes.forEach(function(e){e.score=Number(e.score)||0;e.evo=Number(e.evo)||0;if(e.membres===undefined)e.membres=0;});STATE=s;}catch(e){}}}
 load();
 
 function showTab(id,btn){
@@ -648,7 +437,6 @@ function renderEquipes(){
   var sorted=STATE.equipes.slice().sort(function(a,b){var d=Number(b.score)-Number(a.score);return d!==0?d:a.name.localeCompare(b.name);});
   var max=sorted[0]?sorted[0].score:1;
   var withScore=sorted.filter(function(e){return e.score>0});
-  // podium: 2e à gauche, 1er au centre, 3e à droite
   var podDefs=[
     {idx:1, cls:'pod-2', medal:'&#129352;', label:'2e'},
     {idx:0, cls:'pod-1', medal:'&#129351;', label:'1er'},
@@ -657,18 +445,29 @@ function renderEquipes(){
   var podHtml='';
   podDefs.forEach(function(def){
     var c=withScore[def.idx]; if(!c) return;
-    var exPod=withScore.filter(function(x){return x.score===c.score;}).length>1?' — ex æq.':'';podHtml+='<div class="pod '+def.cls+'"><div class="pod-base"><div class="pod-rank">'+def.medal+'</div><div class="pod-name">'+c.name+'</div><div class="pod-score">'+c.score.toFixed(1)+'</div></div><div class="pod-label">'+def.label+exPod+'</div></div>';
+    var exPod=withScore.filter(function(x){return x.score===c.score;}).length>1?' — ex æq.':'';
+    var mbLabel=c.membres>0?'<br><span style="font-size:.65rem;opacity:.55;font-weight:400">'+c.membres+' inscrits</span>':'';
+    podHtml+='<div class="pod '+def.cls+'"><div class="pod-base"><div class="pod-rank">'+def.medal+'</div><div class="pod-name">'+c.name+mbLabel+'</div><div class="pod-score">'+c.score.toFixed(1)+'</div></div><div class="pod-label">'+def.label+exPod+'</div></div>';
   });
   document.getElementById('podium').innerHTML=podHtml;
+
   var tbody='';
   var realRank=1;
   sorted.forEach(function(c,i){
-    if(i===0){ realRank=1; }
-    else if(c.score!==sorted[i-1].score){ realRank=i+1; }
+    if(i===0){realRank=1;}
+    else if(c.score!==sorted[i-1].score){realRank=i+1;}
     var rank=realRank,cls=rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
     var evo=c.evo>0?'<span class="evo-up">&#9650;</span>':c.evo<0?'<span class="evo-down">&#9660;</span>':'<span class="evo-same">—</span>';
     var pct=max>0?(c.score/max*100):0;
-    tbody+='<tr class="rank-row"><td class="rank-num '+cls+'">'+(rank===1?'&#129351;':rank===2?'&#129352;':rank===3?'&#129353;':rank)+'</td><td class="rank-name">'+c.name+'</td><td class="rank-score">'+(c.score>0?c.score.toFixed(1):'—')+'</td><td class="rank-evo">'+evo+'</td></tr>';
+    // Affichage du nom + membres + note non évalué si < 3
+    var nameHtml=c.name;
+    if(c.membres>0){
+      nameHtml+=' <span class="rank-members">('+c.membres+'&nbsp;inscrits)</span>';
+    }
+    if(c.membres<3){
+      nameHtml+=' <span class="rank-nonevalue">non évalué</span>';
+    }
+    tbody+='<tr class="rank-row"><td class="rank-num '+cls+'">'+(rank===1?'&#129351;':rank===2?'&#129352;':rank===3?'&#129353;':rank)+'</td><td class="rank-name">'+nameHtml+'</td><td class="rank-score">'+(c.score>0?c.score.toFixed(1):'—')+'</td><td class="rank-evo">'+evo+'</td></tr>';
     tbody+='<tr><td colspan="4" class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%"></div></div></td></tr>';
   });
   document.getElementById('rank-body').innerHTML=tbody;
@@ -678,9 +477,13 @@ function renderAdmin(){
   if(STATE.nbMatchs) document.getElementById('nb-matchs-input').value=STATE.nbMatchs;
   var html='';
   STATE.equipes.forEach(function(c,i){
-    html+='<tr><td>'+c.name+'</td>';
+    var nonevalNote=c.membres<3?'<span style="color:rgba(255,255,255,.35);font-size:.7rem;font-style:italic;margin-left:4px">non évalué</span>':'';
+    html+='<tr>';
+    html+='<td>'+c.name+nonevalNote+'</td>';
+    html+='<td><input class="inp-sm admin-nb" type="number" min="0" id="membres-'+i+'" value="'+(c.membres||0)+'" placeholder="0"></td>';
     html+='<td><input class="inp-sm" type="number" step="0.1" min="0" id="score-'+i+'" value="'+(c.score||'')+'" placeholder="0.0"></td>';
-    html+='<td><select class="inp-sm" id="evo-'+i+'"><option value="0"'+(c.evo===0?' selected':'')+'>— stable</option><option value="1"'+(c.evo===1?' selected':'')+'>&#9650; hausse</option><option value="-1"'+(c.evo===-1?' selected':'')+'>&#9660; baisse</option></select></td></tr>';
+    html+='<td><select class="inp-sm" id="evo-'+i+'"><option value="0"'+(c.evo===0?' selected':'')+'>— stable</option><option value="1"'+(c.evo===1?' selected':'')+'>&#9650; hausse</option><option value="-1"'+(c.evo===-1?' selected':'')+'>&#9660; baisse</option></select></td>';
+    html+='</tr>';
   });
   document.getElementById('admin-tbody').innerHTML=html;
 }
@@ -690,6 +493,7 @@ function updateScores(){
   STATE.majDate=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
   STATE.nbMatchs=parseInt(document.getElementById('nb-matchs-input').value)||0;
   STATE.equipes.forEach(function(c,i){
+    c.membres=parseInt(document.getElementById('membres-'+i).value)||0;
     c.score=Number(parseFloat(document.getElementById('score-'+i).value))||0;
     c.evo=parseInt(document.getElementById('evo-'+i).value)||0;
   });
@@ -739,6 +543,5 @@ document.addEventListener('DOMContentLoaded', function(){
   renderEquipes();
 });
 </script>
-
 
 </body></html>
